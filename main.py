@@ -10,6 +10,8 @@ monster.Monster("Goblin", 2, dice.set_dices("3w4"))
 monster.Monster("Goblin", 2, dice.set_dices("3w4"))
 
 # [color][/color] [][/]
+def new_funktion():
+    return None
 
 def clear_terminal():
     os.system("cls")
