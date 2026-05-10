@@ -1,13 +1,11 @@
 import dice, monster, os, monster_type
 from rich import print
+from ActionConnector import AktionConnector
+import sys
+
+action_handler = AktionConnector()
 
 tracker_list = monster.tracker_list
-
-monster.Monster("Goblin", 2, dice.set_dices("3w4"))
-monster.Monster("Goblin", 2, dice.set_dices("3w4"))
-monster.Monster("Goblin", 2, dice.set_dices("3w4"))
-monster.Monster("Goblin", 2, dice.set_dices("3w4"))
-monster.Monster("Goblin", 2, dice.set_dices("3w4"))
 
 # [color][/color] [][/]
 def new_funktion():
@@ -20,6 +18,7 @@ def ask_input():
     return input("> ")
 
 while True:
+    clear_terminal()
     monster.show_list()
     print("")
     print("Mögliche Commands:"
@@ -32,7 +31,18 @@ while True:
     "[green]load[/green], "
     "[green]delete[/green]")
     user_input = input("> ")
-    clear_terminal()
+
+    if user_input=="exit":
+        monster_type.save_monster_types()
+        break
+
+    #try:
+    action_handler.execute_function(user_input)
+    #except:
+     #   print(f"Command {user_input} not found")
+
+
+    """
     if(user_input == "add"):
         print("Willst du ein premade Monster wählen?")
         print("[blue]{monster}[/blue]")
@@ -56,3 +66,4 @@ while True:
         pass
     elif(user_input == "delete"):
         pass
+"""

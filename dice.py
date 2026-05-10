@@ -34,19 +34,20 @@ w20 = Dice("w20", 20)
 array = [w4, w6, w8, w10, w12, w100, w20]
 
 # Funktion, welches das aufschreiben fon Würfelarray vereinfacht, so wie def set_dices("5w20")    
-def set_dices(input_dice):
+def set_dices(input_dice: str):
+    dice_list = input_dice.split(",")
     dice_set = []
-    try:
-        count_str, sides_str = input_dice.lower().split('w')
-        count = int(count_str)
-        sides = int(sides_str)
-    except (ValueError, AttributeError):
-        raise ValueError("Notation must be in format 'XwY', e.g. '6w4' for six 4-sided dice.")
+    for dice in dice_list:
+        try:
+            count_str, sides_str = dice.lower().split('w')
+            count = int(count_str)
+            sides = int(sides_str)
+        except (ValueError, AttributeError):
+            raise ValueError("Notation must be in format 'XwY', e.g. '6w4' for six 4-sided dice.")
     
-    for i in array:
-        if sides == i.MAX_NUM:
-            for y in range(count):
-                dice_set.append(i)
-            break
+        for i in array:
+            if sides == i.MAX_NUM:
+                for y in range(count):
+                    dice_set.append(i)
 
     return dice_set

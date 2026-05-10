@@ -7,11 +7,11 @@ DEATH_ABI_ARRAY = []
 
 
 class Monster:
-    def __init__(self, type="mustermann", const_hp=0, hp_dice=[], death_abi=None): 
+    def __init__(self, typ="mustermann", const_hp=0, hp_dice=[], death_abi=None): 
 
-        self.name = type.capitalize()
-        self.TYPE = type.capitalize()
-        self.CONST_HP = const_hp
+        self.name = typ.capitalize()
+        self.TYPE = typ.capitalize()
+        self.CONST_HP = const_hp if type(const_hp) is int else int(const_hp)
         self.HP_DICE = hp_dice       # HP Dices werden durch for loop durchgeprobt und müssen darum eine Liste sein
         self.DEATH_ABI = death_abi
 
@@ -61,7 +61,8 @@ class Monster:
         self.MAX_HP = new_max
 
     def change_hp(self, change):
-        self.cur_hp += change
+        new_hp = self.cur_hp + change
+        self.set_current_hp(new_hp)
     
     """
     Warum nicht HP_DICE und CONST_HP?
