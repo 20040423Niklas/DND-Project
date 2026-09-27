@@ -3,11 +3,45 @@ from rich import print
 
 tracker_list = monster.tracker_list
 
-monster.Monster("Goblin", 2, dice.set_dices("3w4"))
-monster.Monster("Goblin", 2, dice.set_dices("3w4"))
-monster.Monster("Goblin", 2, dice.set_dices("3w4"))
-monster.Monster("Goblin", 2, dice.set_dices("3w4"))
-monster.Monster("Goblin", 2, dice.set_dices("3w4"))
+def add():
+    print("Willst du ein premade Monster wählen?")
+    print("[blue]{monster}[/blue]")
+    print("")
+    print("oder durch [b]leere Eingabe[/b] das letzte Monster nehmen: [yellow]{monster}[/yellow]")
+    print("oder durch [green][+][/green] ein neues Monster Typ erstellen")
+    if(ask_input() == ""):
+        pass
+    pass # Frage, ob [premade Monster wählen] [Leere Eingabe = letztes gewähltes premade Monster] ["+" = Spontan Monster erstellen]
+
+def kill(): #Monster töten aber mit death abillity /Niklas 
+    pass
+
+def change(): #hp verändern /Niklas
+    pass
+
+def edit(): #speziell zur Bearbeitung von Monster stets /Artur
+    pass
+
+def rename(): #persönlichen Namen von Monstern ändern /Niklas
+    pass
+
+def heal(): #zum heilen von Monstern /Artur
+    pass
+
+def damage(): #zum schaden von monstern/Artur
+    pass
+
+def save(): #zum speichern von Spielständen /Niklas
+    pass
+
+def load(): #zum laden von Spielständen /Niklas
+    pass
+
+def delete(): #zum sofortigen löschen von Monstern /Artur
+    pass
+
+
+command_collection = {"add":add,"kill":kill,"change":change,"heal":heal,"damage":damage,"load":load,"save":save,"rename":rename,"edit":edit}
 
 # [color][/color] [][/]
 
@@ -17,40 +51,22 @@ def clear_terminal():
 def ask_input():
     return input("> ")
 
+command_string = ""
+for command in command_collection.keys():
+    command_string = command_string + f"[green]{command}[/green], "
+
+
 while True:
-    monster.show_list()
-    print("")
-    print("Mögliche Commands:"
-    "[green]add[/green], "
-    "[green]rename[/green], "
-    "[green]change[/green], "
-    "[green]kill[/green], "
-    "[green]heal[/green], "
-    "[green]save[/green], "
-    "[green]load[/green], "
-    "[green]delete[/green]")
-    user_input = input("> ")
     clear_terminal()
-    if(user_input == "add"):
-        print("Willst du ein premade Monster wählen?")
-        print("[blue]{monster}[/blue]")
-        print("")
-        print("oder durch [b]leere Eingabe[/b] das letzte Monster nehmen: [yellow]{monster}[/yellow]")
-        print("oder durch [green][+][/green] ein neues Monster Typ erstellen")
-        if(ask_input() == ""):
-            pass
-        pass # Frage, ob [premade Monster wählen] [Leere Eingabe = letztes gewähltes premade Monster] ["+" = Spontan Monster erstellen]
-    elif(user_input == "rename"):
-        pass
-    elif(user_input == "change"):
-        pass
-    elif(user_input == "kill"):
-        pass
-    elif(user_input == "heal"):
-        pass
-    elif(user_input == "save"):
-        pass
-    elif(user_input == "load"):
-        pass
-    elif(user_input == "delete"):
-        pass
+    monster.show_list()
+    print(f"Mögliche Commands: {command_string}")
+
+    user_input = input("> ")
+
+    if user_input == "exit":
+        break
+
+    try:
+        command_collection[user_input]()
+    except:
+        print("Unknown Command")

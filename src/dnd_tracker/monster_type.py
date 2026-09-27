@@ -1,5 +1,6 @@
 import csv
 import dice
+import os
 
 monster_type_list = []
 
@@ -20,13 +21,13 @@ class monster_type:
     def __str__(self): # Zeigt den bloßen Variablennamen als modifizierter String auf
         return f"{self.MONSTER_NAME} - {self.CONST_HP} - {self.HP_DICE} - {self.DEATH_ABI}"
 
-with open("monster_type_set.csv", "r", newline="") as save_file:
+with open("./src/dnd_tracker/monster_type_set.csv", "r", newline="") as save_file:
     saved_data = csv.reader(save_file, delimiter=";")
     for monster in saved_data:
         monster_type_list.append(monster_type(monster[0], monster[1], monster[2], monster[3]))
 
 def save_monster_types():
-    with open("test_monster_type_set.csv", "w", newline="") as save_file:
+    with open("./src/dnd_tracke/monster_type_set.csv", "w", newline="") as save_file:
         written_data = csv.writer(save_file, delimiter=";")
         for monster in monster_type_list:
             written_data.writerow([monster.MONSTER_NAME, monster.CONST_HP, monster.HP_DICE, monster.DEATH_ABI])
